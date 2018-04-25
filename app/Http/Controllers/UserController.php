@@ -27,7 +27,7 @@ class UserController extends Controller
 
     Public function index()
     {
-        return view('usermain');
+        return view('welcome');
     }
 
     public function getUsers(Request $request)
@@ -37,24 +37,10 @@ class UserController extends Controller
             return Response::json(['data' => $users], 200);
         } catch(\NoAvailableUserException $e){
             Log::error($e->getMessage());
-            return Response::json(['data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         } catch(\Exception $e){
             Log::error($e->getMessage());
-            return Response::json(['data' => [], 'msg' => $e->getMessage() ], 400);
-        }
-    }
-
-    public function deleteUsers(Request $request)
-    {
-        try{
-            $response = $this->userService->deleteUsers($request);
-            return Response::json(['data' => $response], 200);
-        } catch(\UserDeleteFailedException $e){
-            Log::error($e->getMessage());
-            return Response::json(['data' => [], 'msg' => $e->getMessage() ], 400);
-        } catch(\Exception $e){
-            Log::error($e->getMessage());
-            return Response::json(['data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         }
     }
 
@@ -65,10 +51,10 @@ class UserController extends Controller
             return Response::json([ 'data' => $user], 200);
         } catch(\NoAvailableUserException $e){
             Log::error($e->getMessage());
-            return Response::json([ 'data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         } catch(\Exception $e){
             Log::error($e->getMessage());
-            return Response::json([ 'data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         }
     }
 
@@ -79,16 +65,16 @@ class UserController extends Controller
             return Response::json(['data' => $response], 200);
         } catch(\UsernameNotAvailableException $e){
             Log::error($e->getMessage());
-            return Response::json(['data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         } catch(\EmailNotAvailableException $e){
             Log::error($e->getMessage());
-            return Response::json(['data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         } catch(\UserCreateFailedException $e){
             Log::error($e->getMessage());
-            return Response::json(['data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         } catch(\Exception $e){
             Log::error($e->getMessage());
-            return Response::json(['data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         }
     }
 
@@ -99,10 +85,10 @@ class UserController extends Controller
             return Response::json(['data' => $response], 200);
         } catch(\UserUpdateFailedException $e){
             Log::error($e->getMessage());
-            return Response::json(['data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         } catch(\Exception $e){
             Log::error($e->getMessage());
-            return Response::json(['data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         }
     }
 
@@ -113,10 +99,10 @@ class UserController extends Controller
             return Response::json([ 'data' => $response], 200);
         } catch(\UserDeleteFailedException $e){
             Log::error($e->getMessage());
-            return Response::json(['data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         } catch(\Exception $e){
             Log::error($e->getMessage());
-            return Response::json([ 'data' => [], 'msg' => $e->getMessage() ], 400);
+            return Response::json(['msg' => $e->getMessage() ], 400);
         }
     }
 

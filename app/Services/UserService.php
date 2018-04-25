@@ -10,7 +10,6 @@ use App\Exceptions\UserUpdateFailedException;
 use App\Exceptions\UserCreateFailedException;
 use App\Exceptions\UserInvalidException;
 use App\Repositories\Contracts\UserRepositoryInterface;
-use App\Repositories\Contracts\UserProfileRepositoryInterface;
 use App\Services\Contracts\UserServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,14 +21,12 @@ class UserService implements UserServiceInterface
 
     protected $userRepository;
 
-    protected $userProfileRepository;
 
     use RegistersUsers;
 
-    public function __construct(UserRepositoryInterface $userRepository, UserProfileRepositoryInterface $userProfileRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->userProfileRepository = $userProfileRepository;
     }
 
     public function createUser(Request $request)
@@ -64,13 +61,6 @@ class UserService implements UserServiceInterface
         if(!$user){
             throw New UserCreateFailedException;
         }
-
-        $this->userProfileRepository->create([
-            'user_id' => $user->id,
-            'address' => $request->address,
-            'postal_code' => $request->postal_code,
-            'phone_number' => $request->phone_number,
-        ]);
 
         return $user;
         
@@ -112,12 +102,6 @@ class UserService implements UserServiceInterface
         if(!$user){
             throw New UserUpdateFailedException;
         }
- 
-        $this->userProfileRepository->update($id, [
-            'address' => $request->address,
-            'postal_code' => $request->postal_code,
-            'phone_number' => $request->phone_number,
-        ]);
 
         return $user;   
     }
@@ -129,8 +113,6 @@ class UserService implements UserServiceInterface
         if(!$user){
             throw New UserDeleteFailedException;
         }
- 
-        $this->userProfileRepository->delete($id);
 
         return $user;
     }
