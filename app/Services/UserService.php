@@ -90,10 +90,17 @@ class UserService implements UserServiceInterface
         $user = $this->userRepository->update($id, [
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'middlename' => $request->username,
+            'height' => $request->height,
+            'gender' => $request->gender,
+            'usertype' =>$request->usertype,
+            'nutritionist' => $request->nutritionist,
+            'device' =>$request->device,
+            'birthday' => $request->birthday,
+            'email' => $request->email
         ]);
+
+
         
         if(!$user){
             throw New UserUpdateFailedException;
