@@ -3,14 +3,14 @@
 namespace App\Repositories;
 
 use App\Repositories\Contracts\UserRepositoryInterface;
-use App\Models\Users;
+use App\User;
 
 class UsersRepository extends BaseRepository implements UserRepositoryInterface
 {
 
     protected $model;
 
-    public function __construct(Users $user)
+    public function __construct(User $user)
     {
         parent::__construct($user);
         $this->model = $user;
@@ -18,12 +18,12 @@ class UsersRepository extends BaseRepository implements UserRepositoryInterface
 
     public function getAll()
     {
-        return $this->model::with('profile')->get();
+        return $this->model->get();
     }
 
     public function getById($id)
     {
-        return $this->model->with('profile')->findOrfail($id);
+        return $this->model->findOrfail($id);
     }
 
 }

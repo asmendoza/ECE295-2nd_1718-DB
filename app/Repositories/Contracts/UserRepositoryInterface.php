@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories\Contracts;
 
-use App\Models\User;
+use App\User;
 
 interface UserRepositoryInterface extends RepositoryInterface
 {

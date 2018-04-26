@@ -33,8 +33,7 @@ class UserService implements UserServiceInterface
     {
 
         $validator = Validator::make($request->all(), [
-            'email' => 'required|unique:users',
-            'username' => 'required|unique:users'
+            'email' => 'required|unique:users'
         ]);
 
         if($validator->fails()){
@@ -42,18 +41,13 @@ class UserService implements UserServiceInterface
             if(!empty($validateEmail)){
                 throw New EmailNotAvailableException;
             }
-
-            $validateUsername = $validator->errors()->first('username');
-            if(!empty($validateUsername)){
-                throw New UsernameNotAvailableException;
-            }
         }
 
 
         $user = $this->userRepository->create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
-            'username' => $request->username,
+            'middlename' => $request->middlename,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -61,6 +55,8 @@ class UserService implements UserServiceInterface
         if(!$user){
             throw New UserCreateFailedException;
         }
+
+        $user->token = $user->createToken('MyApp')->accessToken;
 
         return $user;
         

@@ -18,9 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/users', 'UserController@getUsers')->middleware('auth:api');
+Route::post('/register', 'UserController@addUser');
+
+Route::post('/login', 'UserController@login');
 
 Route::prefix('user')->group(function(){
-    Route::post('add', 'UserController@addUser');
     Route::get('{id}', 'UserController@getUserDetails')->middleware('auth:api');
     Route::put('{id}/update', 'UserController@updateUser')->middleware('auth:api');
     Route::delete('{id}', 'UserController@deleteUser')->middleware('auth:api');

@@ -60,8 +60,10 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 
+Personal access client created successfully.
 Client ID: 1
-Client Secret: nReVYm6uhLHF8BdfJ0q0VeGz7Vvzq3g0WHjaXu5s
+Client Secret: 3cKdF9GWoG1yM5vgKv9UYyjjeBT8v3O7Jh1WZ6tM
 Password grant client created successfully.
 Client ID: 2
-Client Secret: CpYCy6qYHW2WwTHarTuelTKEIhoc5zVoC4eKcAdW
+Client Secret: bDGcqdRAp5fxKqPiHSMkcYWY42FNQuHakG12pTSb
+

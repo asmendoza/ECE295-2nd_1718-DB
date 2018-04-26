@@ -13,7 +13,8 @@ use App\Services\Contracts\UserServiceInterface;
 use Illuminate\Http\Request;
 use Response;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -28,6 +29,18 @@ class UserController extends Controller
     Public function index()
     {
         return view('welcome');
+    }
+
+    public function login(Request $request){
+    
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password ])){
+            $user = Auth::user();
+            $user->token =  $user->createToken('MyApp')->accessToken;
+            return response()->json(['data' => $user], 200);
+        }
+        
+        return response()->json(['error'=>$pword], 401);
+        
     }
 
     public function getUsers(Request $request)
